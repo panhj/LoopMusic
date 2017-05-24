@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	//轮播图big
 	var i = -1; //轮播图片的index值
 	var timer; //section1轮播图定时器
@@ -8,7 +9,6 @@ $(document).ready(function(){
 	showTime();//开始轮播；
 	//小圆点hover
 	$('.doteq').hover(function(){
-
 		i = $(this).index();
 		//alert(i);
 		show();
@@ -52,6 +52,36 @@ $(document).ready(function(){
 		$('.doteq').eq(i).addClass('doth').siblings('.doteq').removeClass('doth');
 	}	
 
+	//歌单精选图片hover放大效果
+	$('.choice-top a').hover(function(){
+		var widthTo = '226px',heightTo = '226px',topTo = '-20px',leftTo = '-20px';		
+		if(this.className == 'big'){
+			widthTo = '462px';
+			heightTo = '462px';
+			topTo = '-40px';
+			leftTo = '-40px';
+		}
+		var $img = $(this).find('img');
+		$img.animate({
+			width:widthTo,
+			height:heightTo,
+			top:topTo,
+			left:leftTo
+		},10)
+	},function(){
+		var widthTo = '186px',heightTo = '186px',topTo = '0px',leftTo = '0px';		
+		if(this.className == 'big'){
+			widthTo = '382px';
+			heightTo = '382px';
+		}
+		var $img = $(this).find('img');
+		$img.animate({
+			width:widthTo,
+			height:heightTo,
+			top:topTo,
+			left:leftTo
+		},10)
+	})
 
 	//轮播图 热门
 	$('.control-cd-right').click(function(){
@@ -71,7 +101,7 @@ $(document).ready(function(){
 				break;
 		}
 		if(!$('.container').is(':animated')){
-			$('.container').animate({left:move_var+'px'},1000);
+			$('.container').animate({left:move_var+'px'},700);
 		}		
 	});
 	$('.control-cd-left').click(function(){
@@ -91,7 +121,7 @@ $(document).ready(function(){
 				break;
 		}
 		if(!$('.container').is(':animated')){
-			$('.container').animate({left:move_var+'px'},"slow");
+			$('.container').animate({left:move_var+'px'},700);
 		}		
 	});
 
