@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	//轮播图big
-	var i = -1; //轮播图片的index值
+	var i = 0; //轮播图片的index值
 	var timer; //section1轮播图定时器
 
 	//先显示第一张隐藏其他

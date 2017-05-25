@@ -2,14 +2,21 @@
 a{text-decoration: none;}
 li{list-style: none;}
 body{background-color:#E6ECED;font-family: '微软雅黑'}
-.section1{height:370px;width:100%;}
-.lunBo-pic{width:1349px;margin:0 auto;position: relative;}
-.lunBo-pic a{height:370px;width:1349px;position: absolute;}
+.section1{
+	height:370px;width:100%;
+	outline: 1px solid #D4D4D4;box-shadow:0 0px 10px #CCCCCC;
+	overflow: hidden;
+}
+.lunBo-pic{
+	height:370px;width:1349px;margin:0 auto;
+	position: relative;
+}
+.lunBo-pic a{height:100%;width:100%;position:absolute;}
 .lunBo-pic img{height:100%;width:100%;}
 .controler{
 	width:50px;height:100px;
 	display: inline-block;
-	position:relative; top:135px;
+	position:relative; top:-235px;
 }
 .controler:hover{background-color:rgba(0,0,0,0.2);}
 .con1{
@@ -23,7 +30,7 @@ body{background-color:#E6ECED;font-family: '微软雅黑'}
 	background-image:url(pic/nav_bg_tab.png);
 	background-position:0px -138px;
 }
-.dot{position: relative;top:330px;width:500px;margin:0 auto;text-align: center;}
+.dot{position: relative;top:-40px;width:500px;margin:0 auto;text-align: center;}
 .dot span{
 	width:12px;height:12px;background-color:white;
 	display: inline-block; border-radius: 6px;
@@ -33,7 +40,11 @@ span.doth{
 	opacity:1;width:16px;height:16px;
 	border-radius:8px;top:2px;margin:0 10px;
 }
-.section2{width:1100px;height:660px;position: relative;margin:20px auto;background-color:white;}
+.section2{
+	width:1100px;height:660px;position: relative;
+	margin:20px auto;background-color:white;
+	outline: 1px solid #D4D4D4;box-shadow:0 0px 10px #CCCCCC;
+}
 .recommend{
 	width:1070px;height:635px;position: relative;top:15px;left:15px;
 }
@@ -41,7 +52,7 @@ span.doth{
 	width:785px;height:635px;border-right:1px solid #BFBFBF;
 	display: inline-block;
 }
- h2{font-weight:500;font-family:'微软雅黑';cursor:default;margin-bottom:10px;}
+ h2{font-weight:300;font-family:'微软雅黑';cursor:default;margin-bottom:10px;}
 
 .choice-top{
 	width:775px;height:390px;position:relative;border-bottom:1px solid #BFBFBF;
@@ -51,6 +62,7 @@ span.doth{
 	position: absolute;width:186px;height:186px;
 	overflow: hidden;
 }
+
 .choice-top a img{
 	width:100%;height:100%;position: relative;top:0;left:0;
 	transition:width 0.5s,height 0.5s,top 0.5s,left 0.5s;
@@ -90,7 +102,9 @@ span.doth{
 .choice-bottom{
 	width:775px;height:195px;position: relative;
 	margin-top:5px;
-	background-color:#E6ECED;
+	background-color:#F2F2F2;
+	border-radius: 20px;
+	box-shadow: 0 0 60px rgba(0,0,0,0.3) inset;
 }
 
 .right-sec{width:275px;height:635px;float: right;margin-left:5px;}
@@ -103,13 +117,31 @@ span.doth{
 }
 .hot-list-ul li a:hover{
 	background-color: #EAEAEA;
-	box-shadow:0 0 10px rgba(100,100,100,0.1) inset;
+	box-shadow:0 0 10px rgba(80,80,80,0.1) inset;
 }
 .hot-list-ul li a img{width:72px;height:72px;}
+.hot-list-ul b{
+	position: relative;top:-40px;left:5px;
+	color:#656565;
+}
+.hot-list-ul span{
+	position: relative;top:-15px;left:-25px;
+	font-size:14px;color:#656565;
+}
+
+
 /*轮播图-热门 */
-.bott-nav{margin:0 0 0 72px;width:400px;}
-.bott-nav li,.bott-nav a{display:inline-block;margin:2px 10px 2px 0;padding:2px 6px 2px 6px;}
-.bott-nav-hover{background-color:#4E8D57;color:white;border-radius: 10px;}
+.bott-nav{
+	margin:0 0 0 72px;width:420px;
+}
+.bott-nav li,.bott-nav a{
+	display:inline-block;margin:2px 10px 2px 0;
+	padding:2px 6px 2px 6px;
+}
+.bott-nav a{
+	background-color:#EAEAEA;color:#4E8D57;border-radius: 10px;
+}
+a.bott-nav-hover,.bott-nav a:hover{background-color:#4E8D57;color:white;}
 .control-cd{
 	width:72px;height:120px;
 	position:absolute;top:55px;
@@ -141,29 +173,37 @@ span.doth{
 .page{float:left;}
 .page li{float:left;}
 .page a{
-	display:block;width:150px;height:150px;
+	display:block;width:150px;height:150px;overflow: hidden;
 	margin:0 5px;position: relative;top:0px;
-	transition: top 0.4s;
+	transition: top 0.4s;border-radius: 10px;
 }
-.page a:hover{top:-6px;}
+.page a:hover{
+	top:-6px;box-shadow:0 2px 5px black;
+}
 .page img{width:100%;height:100%;}
 .hidediv{
 	width:145px;position: absolute;
 	height:150px;top:0;left:0;
 	background-image:url(pic/nav_bg_tab.png);
-	line-height: 260px;padding-left:5px;
-	background-position: 150px 69px;color:white;
+	line-height: 265px;padding-left:5px;
+	background-position: 150px 69px;color:white;font-weight:100;
 }
 
+
+/*轮播图-旋转木马*/
 .section3{
 	width:1100px;height:370px;position:relative;
 	margin: 20px auto;background-color: white;
+	outline: 1px solid #D4D4D4;box-shadow:0 0px 10px #CCCCCC;
 }
 .section3 h2{text-align:center;position:relative;top:20px;font-size:30px;}
-.lunBo3{width:1100px;height:260px;position:relative;top:30px;}
+.lunBo3{
+	width:1100px;height:260px;position:relative;top:30px;
+}
 .lunBo3-pic{
 	width:550px;height:240px;
 	position:absolute;
+	/*box-shadow:0 2px 10px rgba(0,0,0,0.5);*/
 }
 .lunBo3-pic img{width:100%;height:100%;}
 
@@ -201,16 +241,17 @@ span.doth{
 .section4{
 	width:1100px;height:750px;margin:0 auto;
 	position:relative;background-color:white;
+	outline: 1px solid #D4D4D4;box-shadow:0 0px 10px #CCCCCC;
 }
-.section4 h2{text-align:center;position: relative;top:30px;font-size:30px;}
+.section4 h2{text-align:center;position: relative;top:28px;font-size:30px;}
 .container-toplist{
 	width:1080px;height:630px;margin:0 auto;
-	background-color:#F6F6F6;position:relative;top:50px;
+	position:relative;top:50px;
 }
 .container-toplist ul{
 	width:250px;height:600px;position:absolute;
-	background-color:#E6ECED;top:15px;
-	border:1px solid #B3B3B3;
+	background-color:#E6ECED;top:-8px;
+	border:1px solid #D4D4D4;
 }
 .topsong1{left:10px;}
 .topsong2{left:280px;}
@@ -220,6 +261,30 @@ span.doth{
 	width:100%;height:40px;
 }
 .container-toplist ul li:nth-child(odd){background-color:#F9F9F9;}
-.head-li{
-	height:120px !important;
+.container-toplist ul li.head-li{
+	height:120px;
+}
+.container-toplist ul li a:hover{
+	background-image: url(pic/nav1-bg.png);
+	background-position: 0 -125px;
+	color:white;
+}
+.container-toplist ul a{display:block;width:100%;height:100%;}
+.top1-head{
+	background-image: url(pic/topsong.png);
+}
+.top2-head{
+	background-image: url(pic/topsong.png);
+	background-position:0 -125px;
+}
+.top3-head{
+	background-image: url(pic/topsong.png);
+	background-position:0 -250px;
+}
+.top4-head{
+	background-image: url(pic/topsong.png);
+	background-position:0 -375px;
+}
+.container-toplist span{
+	position:relative;top:8px;left:20px;
 }
