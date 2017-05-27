@@ -69,11 +69,11 @@ $(document).ready(function(){
 			top:topTo,
 			left:leftTo
 		},10)
-	},function(){
-		var widthTo = '186px',heightTo = '186px',topTo = '0px',leftTo = '0px';		
-		if(this.className == 'big'){
-			widthTo = '382px';
-			heightTo = '382px';
+		},function(){
+			var widthTo = '186px',heightTo = '186px',topTo = '0px',leftTo = '0px';		
+			if(this.className == 'big'){
+				widthTo = '382px';
+				heightTo = '382px';
 		}
 		var $img = $(this).find('img');
 		$img.animate({

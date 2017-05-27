@@ -50,7 +50,8 @@ $(document).ready(function(){
 		$list:$('.m-list-ol'),
 		$current_name:$('.m-name'),
 		$time:$('.time'),
-		timer:null,
+		timer:null,//时间定时器
+		timer_bar:null,//进度条定时器
 		//播放状态标识
 		isplay:false,
 		play_fun:1,
@@ -58,6 +59,7 @@ $(document).ready(function(){
 		init:function(){
 			//加载的音乐数据
 			Player.data = ['Dogena - Happy.mp3',
+			'山崎まさよし - One more time, One more chance.mp3'
 			];
 			//显示列表所有歌曲
 			var allList = '';
@@ -159,50 +161,107 @@ $(document).ready(function(){
 
 			//点击列表来播放歌曲
 			$('.m-list-ol li').click(function(){
+				if(Player.timer_bar){
+					clearInterval(Player.timer_bar);
+				}
+				
 				var i = $(this).attr('index');
 				Player.audio.src = Player.path + Player.data[i];
-				Player.audio.play();
+				
+				Player.audio.play();	
 				Player.isplay = true;
 				Player.currentIndex = i;
 				//alert(Player.data[Player.currentIndex]);
 				showCurrentName(Player.currentIndex);
 				showCurrentTime();
-				
+
+				autoBar();				
 			});
 
+			//点击进度条
+			$('.play-bar').click(function(event){
+				clearInterval(Player.timer_bar);
+				var width_click = event.pageX - $(this).offset().left;
+				if(width_click>=0){
+					var width_to_bar = parseInt(width_click);
+					$('.played-bar').css('width',width_to_bar+'px');
+					var totalTime_bar = parseInt(Player.audio.duration);
+					//console.log(totalTime_bar);
+					var percent_bar = width_to_bar/550;
+					var current_time_bar = parseInt(totalTime_bar*percent_bar);
+					Player.audio.currentTime = current_time_bar;
+					console.log(current_time_bar);
+				}
+				autoBar();
+			});
+
+
+			//设置播放进度条长度
+			function autoBar(){
+				Player.audio.oncanplay = function(){
+
+					var current_time;
+					var totalTime = parseInt(Player.audio.duration);
+					
+					Player.timer_bar = setInterval(function(){
+						var current_time = parseInt(Player.audio.currentTime);
+						var percent = current_time/totalTime;
+						var width_to = parseInt(550*percent);
+						console.log(current_time);
+						$('.played-bar').css('width',width_to+'px');
+					},1000);
+				};
+			}
+			
 			//显示当前播放的歌曲名
 			function showCurrentName(i){
 				Player.$current_name.html(Player.data[i]);
 			}
 			//显示当前播放时间
 			function showCurrentTime(){
-				timer = setInterval(function(){
+				Player.timer = setInterval(function(){
 					var second = parseInt(Player.audio.currentTime);
 					var m_currentTime = formatSeconds(second);
-					Player.$time.html(m_currentTime);
+					var m_totalTime = totalTime();
+					Player.$time.html(m_currentTime + "/" + m_totalTime);
 				},1000)
 			}
-			
+			//音频总时间
+			function totalTime(){
+				var second = parseInt(Player.audio.duration);
 
+				var m_totalTime = formatSeconds(second);
+				return m_totalTime;
+			}
+			
+ 			//将秒转换成00：00格式
 			function formatSeconds(second){
-		    var mint = 0;// 分
-		    if(second < 10){
-		    	var result = "00:0"+second;
-		    }else if(second>9&&second<60){
-		    	result = "00:"+second;
-		    }
-		    else if(second > 60&&second<599) {
-		        mint = parseInt(second/60);
-		        second = parseInt(second%60);
-		        var result = "0"+mint+":"+second+"秒";
-		    }
-		        
-		        if(mint > 0) {
-		        result = ""+parseInt(mint)+"分"+result;
-		        }
-		        
-		    return result;
-}
+			    var mint = 0;// 分
+			    if(second < 10){
+			    	var result = "00:0"+second;
+			    }else if(second>9&&second<60){
+			    	result = "00:"+second;
+			    }
+			    else if(second > 60&&second<599) {
+			        mint = parseInt(second/60);
+			        second = parseInt(second%60);
+			        if(second<10){
+			        	var result = "0"+mint+":0"+second;
+			        }else{
+			        	var result = "0"+mint+":"+second;
+			        }
+			    }
+			    else{
+			    	mint = parseInt(second/60);
+			        second = parseInt(second%60);
+			        if(second<10){
+			        	var result = mint+":0"+second;
+			        }else{
+			        	var result = mint+":"+second;
+			        }
+			    }
+			    return result;
+			}
 		}
 
 	};
