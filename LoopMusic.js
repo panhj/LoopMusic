@@ -180,7 +180,7 @@ $(document).ready(function(){
 
 			//点击进度条
 			$('.play-bar').click(function(event){
-				clearInterval(Player.timer_bar);
+				//clearInterval(Player.timer_bar);
 				var width_click = event.pageX - $(this).offset().left;
 				if(width_click>=0){
 					var width_to_bar = parseInt(width_click);
