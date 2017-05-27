@@ -1,284 +1,212 @@
 $(document).ready(function(){
-
-	//轮播图big
-	var i = 0; //轮播图片的index值
-	var timer; //section1轮播图定时器
-
-	//先显示第一张隐藏其他
-	$('.pic_tab').eq(0).show().siblings('.pic_tab').hide();
-	showTime();//开始轮播；
-	//小圆点hover
-	$('.doteq').hover(function(){
-		i = $(this).index();
-		//alert(i);
-		show();
-		clearInterval(timer);
-	},function(){
-		showTime();
+	//跳转iframe
+	//alert(1);
+	$('#MyMusic').click(function(event){
+		event.stopPropagation();
+		event.preventDefault(); 
+		$('#iframe').attr('src','MyMusic.html');
 	});
 
-	$('.con1').click(function(){
-		clearInterval(timer);
-		if(i == 0){
-			i = 4;
+	//显示/隐藏底部播放器
+	var player_ishide = false;
+	var list_ishide = true;
+	$(".tab-player").click(function(){
+		if(!player_ishide){
+			//隐藏div
+			$('#player').animate({
+			bottom:'-50px'
+			},300);
+			$('.m-list-ol').slideUp('fast');
+			list_ishide = true;
+			player_ishide = true;
 		}
-		i--;
-		show();
-		showTime();
-	});
-	$('.con2').click(function(){
-		clearInterval(timer);
-		if(i == 3){
-			i = -1;
+		else{
+			$('#player').animate({
+			bottom:'0px'
+			},300);
+			player_ishide = false;
 		}
-		i++;
-		show();
-		showTime();
 	});
 
-	function showTime(){
-		timer = setInterval(function(){		
-			i++;
-			if(i == 4){
-				i = 0;
+	$('.play-list').click(function(){
+		if(list_ishide){
+			//显示列表
+			$('.m-list-ol').slideDown('fast');
+			list_ishide = false;
+		}
+		else{
+			$('.m-list-ol').slideUp('fast');
+			list_ishide = true;
+		}
+	});
+	//控制底部播放器
+
+	var Player = {
+
+		path:'music/',
+		data:null,
+		currentIndex:-1,
+		$audio:$('#audio'),
+		$list:$('.m-list-ol'),
+		$current_name:$('.m-name'),
+		$time:$('.time'),
+		timer:null,
+		//播放状态标识
+		isplay:false,
+		play_fun:1,
+		//初始化数据
+		init:function(){
+			//加载的音乐数据
+			Player.data = ['Dogena - Happy.mp3',
+			];
+			//显示列表所有歌曲
+			var allList = '';
+			for(var i=0;i<Player.data.length;i++){
+				allList += '<li index="' + i + '">' + Player.data[i] + '</li>';
 			}
-			show();
-		}, 5000)
-	}
-	
-	function show(){
-		$('.pic_tab').eq(i).fadeIn(300).siblings('.pic_tab').fadeOut(300);
+			//alert(allList);
+			Player.$list.html(allList);  
+		},
 
-		$('.doteq').eq(i).addClass('doth').siblings('.doteq').removeClass('doth');
-	}	
 
-	//歌单精选图片hover放大效果
-	$('.choice-top a').hover(function(){
-		var widthTo = '226px',heightTo = '226px',topTo = '-20px',leftTo = '-20px';		
-		if(this.className == 'big'){
-			widthTo = '462px';
-			heightTo = '462px';
-			topTo = '-40px';
-			leftTo = '-40px';
-		}
-		var $img = $(this).find('img');
-		$img.animate({
-			width:widthTo,
-			height:heightTo,
-			top:topTo,
-			left:leftTo
-		},10)
-	},function(){
-		var widthTo = '186px',heightTo = '186px',topTo = '0px',leftTo = '0px';		
-		if(this.className == 'big'){
-			widthTo = '382px';
-			heightTo = '382px';
-		}
-		var $img = $(this).find('img');
-		$img.animate({
-			width:widthTo,
-			height:heightTo,
-			top:topTo,
-			left:leftTo
-		},10)
-	})
+		//播放就绪
+		ready:function(){
 
-	//轮播图 热门
-	$('.control-cd-right').click(function(){
-		var move_var = parseInt($('.container').css('left'));
-		switch(move_var){
-			case 0:
-				move_var = -640;
-				break;
-			case -640:
-				move_var = -1280;
-				break;
-			case -1280:
-				$('.container').css('left','0px');
-				move_var = -640;
-				break;
-			default:
-				break;
-		}
-		if(!$('.container').is(':animated')){
-			$('.container').animate({left:move_var+'px'},700);
-		}		
-	});
-	$('.control-cd-left').click(function(){
-		var move_var = parseInt($('.container').css('left'));
-		switch(move_var){
-			case 0:
-				$('.container').css('left','-1280px');
-				move_var = -640;
-				break;
-			case -640:
-				move_var = 0;
-				break;
-			case -1280:
-				move_var = -640;
-				break;
-			default:
-				break;
-		}
-		if(!$('.container').is(':animated')){
-			$('.container').animate({left:move_var+'px'},700);
-		}		
-	});
+			//获取audio节点
+			Player.audio = Player.$audio.get(0);
 
-	//轮播图-旋转木马
-	var lunBo3_timer;
-	lunBo3AutoShow();
-	$('.lunBo3-controler-left').click(function(){
-		clearInterval(lunBo3_timer);
-		for(var i = 0;i<5;i++){
-			var $this = $('.lunBo3-pic').eq(i);
-			var $this_index = parseInt($this.css('z-index'));
-			
-			if($this_index == 4){
-				$this.css('z-index',6);
-			}
-			moveToRight($this,$this_index);	
-		}
-		lunBo3AutoShow();
-	});
-
-	$('.lunBo3-controler-right').click(function(){
-		clearInterval(lunBo3_timer);
-		for(var i = 0;i<5;i++){
-			var $this = $('.lunBo3-pic').eq(i);
-			var $this_index = parseInt($this.css('z-index'));
-			
-			if($this_index == 2){
-				$this.css('z-index',7);
-			}else if($this_index == 1){
-				$this.css('z-index',6);
-			}
-
-			moveToLeft($this,$this_index);	
-		}
-		lunBo3AutoShow();
-	});
-
-	function lunBo3AutoShow(){
-		lunBo3_timer = setInterval(function(){
-			for(var i = 0;i<5;i++){
-				var $this = $('.lunBo3-pic').eq(i);
-				var $this_index = parseInt($this.css('z-index'));
-				
-				if($this_index == 2){
-					$this.css('z-index',7);
-				}else if($this_index == 1){
-					$this.css('z-index',6);
+			//播放
+			$('.play-btn').click(function(){
+				if(!Player.isplay){
+					Player.audio.play();
+					if(Player.currentIndex == -1){
+						$('.next-btn').click();
+					}
+					Player.isplay = true;
+					showCurrentName(Player.currentIndex);
 				}
+				else{
+					Player.audio.pause();
+					Player.isplay = false;
+				}
+			});
 
-				moveToLeft($this,$this_index);	
+			//下一曲
+			$('.next-btn').click(function(){
+				if(Player.currentIndex == -1||Player.currentIndex == (Player.data.length - 1)){
+					Player.currentIndex = 0;
+				}else{
+					Player.currentIndex++;
+				}
+				Player.audio.src = Player.path + Player.data[Player.currentIndex];
+				Player.audio.play();
+				Player.isplay = true;
+				//
+				showCurrentName(Player.currentIndex);				
+			});
+
+			//上一曲
+			$('.pre-btn').click(function(){
+				if(Player.currentIndex == -1){
+					Player.currentIndex = 0;
+				}else if(Player.currentIndex == 0){
+					Player.currentIndex = (Player.data.length - 1);
+				}else{
+					Player.currentIndex--;
+				}
+				Player.audio.src = Player.path + Player.data[Player.currentIndex];
+				Player.audio.play();
+				Player.isplay = true;	
+				showCurrentName(Player.currentIndex);
+			});
+
+			//顺序/单曲/随机播放
+			$('.play-fun').click(function(){
+				switch(Player.play_fun){
+					//点一下变为单曲				
+					case 1:
+						Player.audio.onended = function(){
+							Player.audio.load();
+							Player.audio.play();
+						};
+						//换为单曲图片
+						Player.play_fun = 2;//下次点为随机
+						break;
+
+					//点一下为随机
+					case 2:
+						Player.audio.onended = function(){
+							Player.currentIndex = parseInt((Player.data.length - 1) * Math.random());
+							Player.audio.src = Player.path + Player.data[Player.currentIndex];
+							Player.audio.play();
+						}
+						//换为随机图片
+						Player.play_fun = 3;//下次为顺序
+						break;
+
+					//点一下为顺序
+					case 3:
+						Player.audio.onended = function(){
+							$('.next-btn').click();
+						}
+						Player.play_fun = 1;//下次点为单曲
+						break;
+					//点一下为随机
+					default:break;
+
+				}
+			});
+
+			//点击列表来播放歌曲
+			$('.m-list-ol li').click(function(){
+				var i = $(this).attr('index');
+				Player.audio.src = Player.path + Player.data[i];
+				Player.audio.play();
+				Player.isplay = true;
+				Player.currentIndex = i;
+				//alert(Player.data[Player.currentIndex]);
+				showCurrentName(Player.currentIndex);
+				showCurrentTime();
+				
+			});
+
+			//显示当前播放的歌曲名
+			function showCurrentName(i){
+				Player.$current_name.html(Player.data[i]);
 			}
-		},3000);
-	}
-	
-	function moveToRight(Obj,index){
-		var leftTo,topTo,widthTo,heightTo,indexTo;
-		switch(index){
-			case 1:
-				widthTo = 330;
-				heightTo = 144;
-				leftTo = 100;
-				topTo = 48;
-				indexTo = 3;
-				break;
-			case 2:
-				widthTo = 330;
-				heightTo = 144;
-				leftTo = 670;
-				topTo = 48;
-				indexTo = 1;
-				break;
-			case 3:
-				widthTo = 440;
-				heightTo = 192;
-				leftTo = 160;
-				topTo = 24;
-				indexTo = 4;
-				break;
-			case 4:
-				widthTo = 550;
-				heightTo = 240;
-				leftTo = 275;
-				topTo = 0;
-				indexTo = 5;
-				break;
-			case 5:
-				widthTo = 440;
-				heightTo = 192;
-				leftTo = 500;
-				topTo = 24;
-				indexTo = 2;
-				break;
-			default:break;
-		}
-		if(!Obj.is(':animated')){
+			//显示当前播放时间
+			function showCurrentTime(){
+				timer = setInterval(function(){
+					var second = parseInt(Player.audio.currentTime);
+					var m_currentTime = formatSeconds(second);
+					Player.$time.html(m_currentTime);
+				},1000)
+			}
 			
-			Obj.animate({
-				zIndex:indexTo,
-				width:widthTo+'px',
-				height:heightTo+'px',
-				left:leftTo+'px',
-				top:topTo+'px',	
-				opacity:'1'					
-			},500,"swing");
+
+			function formatSeconds(second){
+		    var mint = 0;// 分
+		    if(second < 10){
+		    	var result = "00:0"+second;
+		    }else if(second>9&&second<60){
+		    	result = "00:"+second;
+		    }
+		    else if(second > 60&&second<599) {
+		        mint = parseInt(second/60);
+		        second = parseInt(second%60);
+		        var result = "0"+mint+":"+second+"秒";
+		    }
+		        
+		        if(mint > 0) {
+		        result = ""+parseInt(mint)+"分"+result;
+		        }
+		        
+		    return result;
+}
 		}
-	}
-	function moveToLeft(Obj,index){
-		var leftTo,topTo,widthTo,heightTo,indexTo;
-		switch(index){
-			case 1:
-				widthTo = 440;
-				heightTo = 192;
-				leftTo = 500;
-				topTo = 24;
-				indexTo = 2;
-				break;
-			case 2:
-				widthTo = 550;
-				heightTo = 240;
-				leftTo = 275;
-				topTo = 0;
-				indexTo = 5;
-				break;
-			case 3:
-				widthTo = 330;
-				heightTo = 144;
-				leftTo = 670;
-				topTo = 48;
-				indexTo = 1;
-				break;
-			case 4:
-				widthTo = 330;
-				heightTo = 144;
-				leftTo = 100;
-				topTo = 48;
-				indexTo = 3;
-				break;
-			case 5:
-				widthTo = 440;
-				heightTo = 192;
-				leftTo = 160;
-				topTo = 24;
-				indexTo = 4;
-				break;
-			default:break;
-		}
-		if(!Obj.is(':animated')){
-			
-			Obj.animate({
-				zIndex:indexTo,
-				width:widthTo+'px',
-				height:heightTo+'px',
-				left:leftTo+'px',
-				top:topTo+'px',	
-				opacity:'1'					
-			},500,"swing");
-		}
-	}
-	
+
+	};
+
+	Player.init();
+	Player.ready();
 })

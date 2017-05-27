@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>LoopMusic</title>
 	<link rel="stylesheet" href="LoopMusic.css">
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="LoopMusic.js"></script>
 </head>
 <body>
 	<div class="double-bar">
@@ -12,7 +14,7 @@
 				<a href="#"><img class="link-logo" src="pic/logo.png" alt="Loop音乐"></a>
 				<ul class="nav1-ul">
 					<li class="nav1-bg"><a href="#">音乐库</a></li
-					><li><a href="#">我的音乐</a></li
+					><li><a id="MyMusic" href="#">我的音乐</a></li
 					><li><a href="#">客服中心</a></li
 					><li><a href="#">客户端</a></li>
 					<input type="text"/>
@@ -35,9 +37,31 @@
 				</ul>
 			</div>
 		</nav>
-	<iframe src="Home.html" frameborder="0" scrolling="no" width="1300px;" height="2200px">
+	<iframe id="iframe" src="Home.html" frameborder="0" scrolling="no" width="1300px;" height="2200px">
 	</iframe>
 
+	<section id="player">
+		<div class="tab-player"></div>
+		<div class="container-player">
+			<audio id="audio" src="#"></audio>
+			<div class="play-control">
+				<div title="播放" class="play-btn"></div>
+				<div class="pre-btn"></div>
+				<div class="next-btn"></div>
+				<div class="m-name"><b>泪桥</b>伍佰</div>
+				<div class="play-bar"></div>
+				<div class="time">20:20/20:20</div>	
+				<div class="play-fun"></div>
+				<div class="play-list"></div>
+				<div class="vol"></div>
+			</div>
+			<div class="m-list">
+				<ol class="m-list-ol">
+				
+				</ol>
+			</div>
+		</div>
+	</section>
 	<footer>asdas</footer>
 </body>
 </html>
