@@ -17,6 +17,7 @@ $(document).ready(function(){
 			bottom:'-50px'
 			},300);
 			$('.m-list-ol').slideUp('fast');
+			$(this).css('backgroundPosition','-65px -121px');
 			list_ishide = true;
 			player_ishide = true;
 		}
@@ -25,6 +26,7 @@ $(document).ready(function(){
 			bottom:'0px'
 			},300);
 			player_ishide = false;
+			$(this).css('backgroundPosition','-125px -121px');
 		}
 	});
 
@@ -86,10 +88,12 @@ $(document).ready(function(){
 						$('.next-btn').click();
 					}
 					Player.isplay = true;
+					$(this).css('backgroundPosition','-126px -41px');
 					showCurrentName(Player.currentIndex);
 				}
 				else{
 					Player.audio.pause();
+					$(this).css('backgroundPosition','-80px -41px');
 					Player.isplay = false;
 				}
 			});
@@ -106,6 +110,7 @@ $(document).ready(function(){
 				Player.audio.play();
 				Player.isplay = true;
 				autoBar();
+				$('.play-btn').css('backgroundPosition','-126px -41px');
 				showCurrentName(Player.currentIndex);				
 			});
 
@@ -123,6 +128,7 @@ $(document).ready(function(){
 				Player.audio.play();
 				Player.isplay = true;	
 				showCurrentName(Player.currentIndex);
+				$('.play-btn').css('backgroundPosition','-126px -41px');
 				autoBar();
 			});
 
@@ -136,6 +142,7 @@ $(document).ready(function(){
 							Player.audio.play();
 						};
 						//换为单曲图片
+						$(this).css('backgroundPosition','-40px -81px')
 						Player.play_fun = 2;//下次点为随机
 						break;
 
@@ -147,6 +154,7 @@ $(document).ready(function(){
 							Player.audio.play();
 						}
 						//换为随机图片
+						$(this).css('backgroundPosition','0px -81px')
 						Player.play_fun = 3;//下次为顺序
 						break;
 
@@ -155,6 +163,7 @@ $(document).ready(function(){
 						Player.audio.onended = function(){
 							$('.next-btn').click();
 						}
+						$(this).css('backgroundPosition','-80px -81px')
 						Player.play_fun = 1;//下次点为单曲
 						break;
 					//点一下为随机
@@ -174,7 +183,8 @@ $(document).ready(function(){
 				Player.currentIndex = i;
 				//alert(Player.data[Player.currentIndex]);
 				showCurrentName(Player.currentIndex);
-				showCurrentTime();	
+				showCurrentTime();
+				$('.play-btn').css('backgroundPosition','-126px -41px');	
 				autoBar();
 			});
 
@@ -267,11 +277,14 @@ $(document).ready(function(){
 			$('.muted').click(function(){
 				if(Player.audio.muted == false){
 					Player.audio.muted = true;
+					$(this).css('backgroundPosition','-155px -81px');
 				}else{
 					Player.audio.muted = false;
+					$(this).css('backgroundPosition','-120px -81px');
 				}
 			});
 			//点击音量条调节音量
+			Player.audio.volume = 0.7;
 			$('.vol').click(function(event){
 				var width_click = event.pageX - $(this).offset().left -25;
 				

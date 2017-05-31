@@ -8,7 +8,7 @@ body{background-color:#E6ECED;font-family: '微软雅黑'}
 	overflow: hidden;
 }
 .lunBo-pic{
-	height:370px;width:1349px;margin:0 auto;
+	height:370px;width:1100px;margin:0 auto;
 	position: relative;
 }
 .lunBo-pic a{height:100%;width:100%;position:absolute;}
@@ -16,7 +16,7 @@ body{background-color:#E6ECED;font-family: '微软雅黑'}
 .controler{
 	width:50px;height:100px;
 	display: inline-block;
-	position:relative; top:-235px;
+	position:relative; top:135px;
 }
 .controler:hover{background-color:rgba(0,0,0,0.2);}
 .con1{

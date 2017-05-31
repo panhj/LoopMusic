@@ -55,76 +55,103 @@ iframe{
 #player{
 	position:fixed;bottom:0px;
 	width:100%;min-width:1349px;height:50px;
-	background-image:url(pic/nav1-bg.png);
+	background-color:gray;
 }
 .tab-player{
 	position:absolute;bottom:50px;
 	width:50px;height:35px;left:50%;margin-left:-25px;
-	background-color:black;
+	background-image:url(pic/player.png);
+	background-position: -125px -121px;
 }
 .container-player{
 	width:1100px;height:40px;
-	background-color: white;
 	position: relative;margin:0 auto;
-	top:5px;
+	top:5px;box-shadow: 0 0 10px white inset;
+	border-radius: 10px;
 }
 .play-control div{
 	position:absolute;
-	background-color:gray;
 }
 .play-btn{
 	width:35px;height:35px;top:2px;left:70px;
+	background-image:url(pic/player.png);
+	background-position: -80px -41px;
 }
 .pre-btn{
 	width:30px;height:30px;top:5px;left:30px;
+	background-image:url(pic/player.png);
+	background-position: -40px -41px;
 }
 .next-btn{
 	width:30px;height:30px;top:5px;left:115px;
+	background-image:url(pic/player.png);
+	background-position: 0px -41px;
 }
 .m-name{
 	width:500px;height:18px;top:1px;left:170px;
-	font-size:15px;color:white;line-height:17px;
+	font-size:14px;color:white;line-height:17px;
 }
-.m-name b{margin-right:20px;}
+.m-name{margin:0 2px;}
 .play-bar{
 	width:550px;height:15px;top:20px;left:170px;
+	border-radius:7px;overflow:hidden;
+	background-image:url(pic/player.png);
+	background-position: 0px 0px;
 }
 div.played-bar{
 	position:absolute;
 	width:100px;height:15px;top:0px;left:0px;
-	background-color:red;
+	border-radius:6px;
+	background-image:url(pic/player.png);
+	background-position: 0px -17px;
 }
 .time{
 	width:80px;height:15px;top:20px;left:730px;
 	font-size:12px;color:white;
 }
 .play-fun{
-	width:30px;height:30px;top:5px;left:830px;
+	width:30px;height:30px;top:5px;left:820px;
+	background-image:url(pic/player.png);
+	background-position: -80px -81px;
 }
 .play-list{
-	width:30px;height:30px;top:5px;left:870px;
+	width:55px;height:30px;top:5px;left:860px;
+	background-image:url(pic/player.png);
+	background-position: 0px -121px;
 }
 .vol{
 	width:125px;height:25px;top:7px;left:930px;
+	border-radius:12px;overflow: hidden;
+	background-image:url(pic/player.png);
+	background-position: 0px -161px;
 }
 div.muted{
-	width:25px;height:25px;background-color:yellow;
+	width:25px;height:25px;
+	background-image:url(pic/player.png);
+	background-position: -120px -81px;
 }
 div.voled{
-	width:100px;height:25px;left:25px;background-color:red;
+	width:75px;height:15px;left:25px;top:6px;
+	border-radius:6px;
+	background-image:url(pic/player.png);
+	background-position: 0px -189px;
 }
 .m-list-ol{
 	width:300px;position:absolute;bottom:48px;right:0px;
-	background-color:#C5DDD9;opacity:0.8;display: none;
+	opacity:0.9;display: none;background-color:gray;
+	border-radius:10px;
 }
 .m-list-ol li{
-	margin-left:25px;
-	width:300px;height:20px;list-style:decimal;
+	margin-left:10px;padding:2px;color:#E8E8E8;
+	text-overflow: ellipsis;
+	white-space: nowrap;overflow: hidden;
+	width:280px;height:20px;list-style:decimal;
 }
+
 footer{
 	display: block;
 	width:100%;height:200px;
-	background-color:gray;
+	background-color:#585858;
 	margin-top:0px;min-width: 1347px;
 }
 
