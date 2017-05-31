@@ -53,6 +53,7 @@ $(document).ready(function(){
 		$('.doteq').eq(i).addClass('doth').siblings('.doteq').removeClass('doth');
 	}	
 
+
 	//歌单精选图片hover放大效果
 	$('.choice-top a').hover(function(){
 		var widthTo = '226px',heightTo = '226px',topTo = '-20px',leftTo = '-20px';		
@@ -63,6 +64,7 @@ $(document).ready(function(){
 			leftTo = '-40px';
 		}
 		var $img = $(this).find('img');
+		//
 		$img.animate({
 			width:widthTo,
 			height:heightTo,

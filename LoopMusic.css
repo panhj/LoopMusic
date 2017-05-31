@@ -105,7 +105,13 @@ div.played-bar{
 	width:30px;height:30px;top:5px;left:870px;
 }
 .vol{
-	width:150px;height:25px;top:7px;left:910px;
+	width:125px;height:25px;top:7px;left:930px;
+}
+div.muted{
+	width:25px;height:25px;background-color:yellow;
+}
+div.voled{
+	width:100px;height:25px;left:25px;background-color:red;
 }
 .m-list-ol{
 	width:300px;position:absolute;bottom:48px;right:0px;

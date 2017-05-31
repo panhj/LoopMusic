@@ -55,6 +55,7 @@ $(document).ready(function(){
 		//播放状态标识
 		isplay:false,
 		play_fun:1,
+		$played_bar:$('.played-bar'),
 		//初始化数据
 		init:function(){
 			//加载的音乐数据
@@ -95,6 +96,7 @@ $(document).ready(function(){
 
 			//下一曲
 			$('.next-btn').click(function(){
+				clearInterval(Player.timer_bar);
 				if(Player.currentIndex == -1||Player.currentIndex == (Player.data.length - 1)){
 					Player.currentIndex = 0;
 				}else{
@@ -103,12 +105,13 @@ $(document).ready(function(){
 				Player.audio.src = Player.path + Player.data[Player.currentIndex];
 				Player.audio.play();
 				Player.isplay = true;
-				//
+				autoBar();
 				showCurrentName(Player.currentIndex);				
 			});
 
 			//上一曲
 			$('.pre-btn').click(function(){
+				clearInterval(Player.timer_bar);
 				if(Player.currentIndex == -1){
 					Player.currentIndex = 0;
 				}else if(Player.currentIndex == 0){
@@ -120,6 +123,7 @@ $(document).ready(function(){
 				Player.audio.play();
 				Player.isplay = true;	
 				showCurrentName(Player.currentIndex);
+				autoBar();
 			});
 
 			//顺序/单曲/随机播放
@@ -161,26 +165,22 @@ $(document).ready(function(){
 
 			//点击列表来播放歌曲
 			$('.m-list-ol li').click(function(){
-				if(Player.timer_bar){
-					clearInterval(Player.timer_bar);
-				}
+				clearInterval(Player.timer_bar);
 				
 				var i = $(this).attr('index');
 				Player.audio.src = Player.path + Player.data[i];
-				
 				Player.audio.play();	
 				Player.isplay = true;
 				Player.currentIndex = i;
 				//alert(Player.data[Player.currentIndex]);
 				showCurrentName(Player.currentIndex);
-				showCurrentTime();
-
-				autoBar();				
+				showCurrentTime();	
+				autoBar();
 			});
 
 			//点击进度条
 			$('.play-bar').click(function(event){
-				//clearInterval(Player.timer_bar);
+				clearInterval(Player.timer_bar);
 				var width_click = event.pageX - $(this).offset().left;
 				if(width_click>=0){
 					var width_to_bar = parseInt(width_click);
@@ -190,9 +190,8 @@ $(document).ready(function(){
 					var percent_bar = width_to_bar/550;
 					var current_time_bar = parseInt(totalTime_bar*percent_bar);
 					Player.audio.currentTime = current_time_bar;
-					console.log(current_time_bar);
+					//console.log(current_time_bar);
 				}
-				autoBar();
 			});
 
 
@@ -202,14 +201,15 @@ $(document).ready(function(){
 
 					var current_time;
 					var totalTime = parseInt(Player.audio.duration);
-					
+				
 					Player.timer_bar = setInterval(function(){
 						var current_time = parseInt(Player.audio.currentTime);
 						var percent = current_time/totalTime;
 						var width_to = parseInt(550*percent);
 						console.log(current_time);
-						$('.played-bar').css('width',width_to+'px');
+						Player.$played_bar.css('width',width_to+'px');
 					},1000);
+					
 				};
 			}
 			
@@ -262,6 +262,26 @@ $(document).ready(function(){
 			    }
 			    return result;
 			}
+
+			//点击静音
+			$('.muted').click(function(){
+				if(Player.audio.muted == false){
+					Player.audio.muted = true;
+				}else{
+					Player.audio.muted = false;
+				}
+			});
+			//点击音量条调节音量
+			$('.vol').click(function(event){
+				var width_click = event.pageX - $(this).offset().left -25;
+				
+				if(width_click>0){
+					var volume_to = parseFloat(width_click/100); 
+					console.log(width_click);
+					Player.audio.volume = volume_to;
+					$('.voled').css('width',width_click+'px');
+				}
+			});
 		}
 
 	};
