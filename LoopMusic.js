@@ -110,7 +110,7 @@ $(document).ready(function(){
 			//播放
 			$('.play-btn').click(function(){
 				if(!Player.isplay){
-					Player.audio.play();
+					//Player.audio.play();
 					if(Player.currentIndex == -1){
 						$('.next-btn').click();
 					}
