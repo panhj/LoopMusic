@@ -175,6 +175,7 @@ a.bott-nav-hover,.bott-nav a:hover{background-color:#4E8D57;color:white;}
 .page a{
 	display:block;width:150px;height:150px;overflow: hidden;
 	margin:0 5px;position: relative;top:0px;
+	-webkit-transform: top 0.4s;border-radius: 10px;
 	transition: top 0.4s;border-radius: 10px;
 }
 .page a:hover{

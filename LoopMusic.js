@@ -41,8 +41,13 @@ $(document).ready(function(){
 			list_ishide = true;
 		}
 	});
-	//控制底部播放器
 
+	
+	
+
+
+
+	//控制底部播放器
 	var Player = {
 
 		path:'music/',
@@ -61,17 +66,17 @@ $(document).ready(function(){
 		//初始化数据
 		init:function(){
 			//加载的音乐数据
-			Player.data = ['Dogena - Happy.mp3',
-			'山崎まさよし - One more time, One more chance.mp3'
-			];
+			Player.data = [["蜚蜚",44630988],["孤雏",267837076],["樱花树下",907620]];
 			//显示列表所有歌曲
 			var allList = '';
 			for(var i=0;i<Player.data.length;i++){
-				allList += '<li index="' + i + '">' + Player.data[i] + '</li>';
+				allList += '<li index="' + i + '">' + Player.data[i][0] + '</li>';
 			}
 			//alert(allList);
 			Player.$list.html(allList);  
 		},
+
+		
 
 
 		//播放就绪
@@ -80,6 +85,26 @@ $(document).ready(function(){
 			//获取audio节点
 			Player.audio = Player.$audio.get(0);
 
+			//传入歌曲id返回当前的歌曲url；
+			function setSongSrc(id){
+				
+				 $.ajax({
+                 url: "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid="+id+"&011",
+                 dataType: "jsonp",
+                 type:"Get",
+                 jsonpCallback: "jsonpCallback",
+                 success: function (data) {
+	                     $.each(data, function (i, v) {
+	                         if (i=="bitrate") {
+	                            
+	                            Player.audio.src = v.show_lick;
+	                         }
+	                     });
+	                 },error: function (responseText, textStatus, XMLHttpRequest) {
+	                     console.log(textStatus);
+	                 }
+                 });
+			}
 			//播放
 			$('.play-btn').click(function(){
 				if(!Player.isplay){
@@ -106,7 +131,8 @@ $(document).ready(function(){
 				}else{
 					Player.currentIndex++;
 				}
-				Player.audio.src = Player.path + Player.data[Player.currentIndex];
+				setSongSrc(Player.data[Player.currentIndex][1]);
+				//Player.audio.src = Player.path + Player.data[Player.currentIndex];
 				Player.audio.play();
 				Player.isplay = true;
 				autoBar();
@@ -124,7 +150,8 @@ $(document).ready(function(){
 				}else{
 					Player.currentIndex--;
 				}
-				Player.audio.src = Player.path + Player.data[Player.currentIndex];
+				setSongSrc(Player.data[Player.currentIndex][1]);
+				//Player.audio.src = Player.path + Player.data[Player.currentIndex];
 				Player.audio.play();
 				Player.isplay = true;	
 				showCurrentName(Player.currentIndex);
@@ -177,7 +204,8 @@ $(document).ready(function(){
 				clearInterval(Player.timer_bar);
 				
 				var i = $(this).attr('index');
-				Player.audio.src = Player.path + Player.data[i];
+				setSongSrc(Player.data[i][1]);
+				//Player.audio.src = Player.path + Player.data[i];
 				Player.audio.play();	
 				Player.isplay = true;
 				Player.currentIndex = i;
@@ -284,7 +312,7 @@ $(document).ready(function(){
 				}
 			});
 			//点击音量条调节音量
-			Player.audio.volume = 0.7;
+			//Player.audio.volume = 0.7;
 			$('.vol').click(function(event){
 				var width_click = event.pageX - $(this).offset().left -25;
 				

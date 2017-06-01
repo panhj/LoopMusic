@@ -61,7 +61,7 @@ iframe{
 	position:absolute;bottom:50px;
 	width:50px;height:35px;left:50%;margin-left:-25px;
 	background-image:url(pic/player.png);
-	background-position: -125px -121px;
+	background-position: -125px -121px;cursor:pointer;
 }
 .container-player{
 	width:1100px;height:40px;
@@ -70,7 +70,7 @@ iframe{
 	border-radius: 10px;
 }
 .play-control div{
-	position:absolute;
+	position:absolute;cursor:pointer;
 }
 .play-btn{
 	width:35px;height:35px;top:2px;left:70px;
@@ -139,11 +139,11 @@ div.voled{
 .m-list-ol{
 	width:300px;position:absolute;bottom:48px;right:0px;
 	opacity:0.9;display: none;background-color:gray;
-	border-radius:10px;
+	border-radius:10px;border:1px solid white;
 }
 .m-list-ol li{
 	margin-left:10px;padding:2px;color:#E8E8E8;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis;cursor:pointer;
 	white-space: nowrap;overflow: hidden;
 	width:280px;height:20px;list-style:decimal;
 }
