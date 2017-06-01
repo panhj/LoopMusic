@@ -89,15 +89,16 @@ $(document).ready(function(){
 			function setSongSrc(id){
 				
 				 $.ajax({
-                 url: "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid="+id+"&011",
+                 url: "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid="+id,
                  dataType: "jsonp",
-                 type:"Get",
+                 type:"Post",
                  jsonpCallback: "jsonpCallback",
                  success: function (data) {
 	                     $.each(data, function (i, v) {
 	                         if (i=="bitrate") {
-	                            
-	                            Player.audio.src = v.show_lick;
+	                            //alert(v.show_link);
+	                            Player.audio.src = v.show_link;
+	                            Player.audio.play();
 	                         }
 	                     });
 	                 },error: function (responseText, textStatus, XMLHttpRequest) {
@@ -105,6 +106,7 @@ $(document).ready(function(){
 	                 }
                  });
 			}
+			//setSongSrc(44630988);
 			//播放
 			$('.play-btn').click(function(){
 				if(!Player.isplay){
@@ -133,7 +135,7 @@ $(document).ready(function(){
 				}
 				setSongSrc(Player.data[Player.currentIndex][1]);
 				//Player.audio.src = Player.path + Player.data[Player.currentIndex];
-				Player.audio.play();
+				//Player.audio.play();
 				Player.isplay = true;
 				autoBar();
 				$('.play-btn').css('backgroundPosition','-126px -41px');
@@ -152,7 +154,7 @@ $(document).ready(function(){
 				}
 				setSongSrc(Player.data[Player.currentIndex][1]);
 				//Player.audio.src = Player.path + Player.data[Player.currentIndex];
-				Player.audio.play();
+				//Player.audio.play();
 				Player.isplay = true;	
 				showCurrentName(Player.currentIndex);
 				$('.play-btn').css('backgroundPosition','-126px -41px');
@@ -206,7 +208,7 @@ $(document).ready(function(){
 				var i = $(this).attr('index');
 				setSongSrc(Player.data[i][1]);
 				//Player.audio.src = Player.path + Player.data[i];
-				Player.audio.play();	
+				//Player.audio.play();	
 				Player.isplay = true;
 				Player.currentIndex = i;
 				//alert(Player.data[Player.currentIndex]);
@@ -253,7 +255,7 @@ $(document).ready(function(){
 			
 			//显示当前播放的歌曲名
 			function showCurrentName(i){
-				Player.$current_name.html(Player.data[i]);
+				Player.$current_name.html(Player.data[i][0]);
 			}
 			//显示当前播放时间
 			function showCurrentTime(){
