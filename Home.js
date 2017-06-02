@@ -44,7 +44,7 @@ $(document).ready(function(){
 				i = 0;
 			}
 			show();
-		}, 5000)
+		}, 3000)
 	}
 	
 	function show(){
