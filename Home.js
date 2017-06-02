@@ -55,6 +55,7 @@ $(document).ready(function(){
 
 
 	//歌单精选图片hover放大效果
+	$('.choice-top a').click(function(){console.log(0)});
 	$('.choice-top a').hover(function(){
 		var widthTo = '226px',heightTo = '226px',topTo = '-20px',leftTo = '-20px';		
 		if(this.className == 'big'){
