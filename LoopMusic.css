@@ -142,11 +142,12 @@ div.voled{
 	border-radius:10px;border:1px solid white;
 }
 .m-list-ol li{
-	margin-left:10px;padding:2px;color:#E8E8E8;
-	text-overflow: ellipsis;cursor:pointer;
-	white-space: nowrap;overflow: hidden;
-	width:280px;height:20px;list-style:decimal;
+	margin-left:10px;padding:2px;color:white;
+	cursor:pointer;list-style:decimal;font-weight: 300;font-size:15px;
+	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;
+	width:280px;height:20px;
 }
+.m-list-ol li:hover{outline:1px solid white;}
 
 footer{
 	display: block;

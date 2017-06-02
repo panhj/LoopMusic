@@ -17,7 +17,7 @@ $(document).ready(function(){
 			bottom:'-50px'
 			},300);
 			$('.m-list-ol').slideUp('fast');
-			$(this).css('backgroundPosition','-65px -121px');
+			$(this).css('backgroundPosition','-65px -122px');
 			list_ishide = true;
 			player_ishide = true;
 		}
@@ -66,11 +66,29 @@ $(document).ready(function(){
 		//初始化数据
 		init:function(){
 			//加载的音乐数据
-			Player.data = [["蜚蜚",44630988],["孤雏",267837076],["樱花树下",907620]];
+			//数组
+			Player.data = [
+				["蜚蜚 - 陈僖仪",44630988],
+				["孤雏 - Aga",267837076],
+				["樱花树下 - 张敬轩",907620],
+				["落在胸口的星星 - 	郁可唯",907620],
+				["来日方长 - 黄龄/薛之谦",541111287],
+				["最初的记忆 - 徐佳莹",541615960],
+				["FLIP - Veegee/LiCong 李聪",541545045],
+				["桃花诺 - G.E.M.邓紫棋",541680641],
+				["春风十里不如你 - 李健",540489526],
+				["Tired - Alan Walker/Gavin James",541455871],
+				["江湖晚 - 戴荃/周华健",540609176],
+				["刚好遇见你 - 李玉刚",276867440],
+				["成都 - 赵雷",274841326],
+				["告白气球 - 周杰伦",266322598],
+				["逆流成河 - 宇桐非",533308233],
+				["一路上有你 - 张学友",620023],
+			];
 			//显示列表所有歌曲
 			var allList = '';
 			for(var i=0;i<Player.data.length;i++){
-				allList += '<li index="' + i + '">' + Player.data[i][0] + '</li>';
+				allList += '<li index="' + i + '">' + (i+1) + "、" + Player.data[i][0] + '</li>';
 			}
 			//alert(allList);
 			Player.$list.html(allList);  
@@ -112,7 +130,7 @@ $(document).ready(function(){
 				if(!Player.isplay){
 					//Player.audio.play();
 					if(Player.currentIndex == -1){
-						$('.next-btn').click();
+						$('.m-list-ol li').eq(0).click();
 					}
 					Player.isplay = true;
 					$(this).css('backgroundPosition','-126px -41px');
