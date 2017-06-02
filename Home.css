@@ -193,7 +193,7 @@ a.bott-nav-hover,.bott-nav a:hover{background-color:#4E8D57;color:white;}
 	height:150px;top:0;left:0;
 	background-image:url(pic/nav_bg_tab.png);
 	line-height: 265px;padding-left: 5px;font-size:14px;
-	background-position: 150px 69px;color:#EBEBEB;font-weight:100;
+	background-position: 150px 69px;color:white;font-weight:100;
 	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;
 }
 
