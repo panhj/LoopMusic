@@ -36,6 +36,10 @@ iframe{
 	background-position:10px -77px;
 	background-color: #EDF0F0;
 }
+.search{
+	width:30px;height:25px;
+	position:absolute;top:25px;left:425px;
+}
 .logo-div {display:inline-block;width:100px;height:70px;}
 .nav1-ul input:focus{outline:none;}
 .logo-div a{width:40px;font-size:10px;}

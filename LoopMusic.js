@@ -116,6 +116,7 @@ $(document).ready(function(){
 	                         if (i=="bitrate") {
 	                            //alert(v.show_link);
 	                            Player.audio.src = v.show_link;
+	                            //alert(v.show_link);
 	                            Player.audio.play();
 	                         }
 	                     });
@@ -124,7 +125,41 @@ $(document).ready(function(){
 	                 }
                  });
 			}
-			//setSongSrc(44630988);
+			
+			//点击搜索框播放；
+			$('.search').click(function(){
+				 var song_id;
+				 var music_name = $("input[name='music-name']").val();
+				 //alert(music_name);
+				 $.ajax({
+                 url: "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.search.catalogSug&query="+music_name,
+                 dataType: "jsonp",
+                 type:"Post",
+                 jsonpCallback: "jsonpCallback",
+                 success: function (data) {
+                 		//这里只获取第一个搜索结果的id数据
+                 		song_id = data.song[0].songid;
+                 		//alert(song_id);
+	                     // $.each(data.song, function (i, v) {
+	                     //        song_id = v.songid;
+	                     //        alert(song_id);
+	                     // });
+	                     //更新播放列表第一个歌曲名和id；
+	                     Player.data[0][0] = music_name;
+	                     Player.data[0][1] = song_id;
+	                     //加入到播放列表的第一个
+	                     $list:$('.m-list-ol li').eq(0).html("1、"+music_name);
+	            		 $('.play-btn').click();
+
+	                 },error: function (responseText, textStatus, XMLHttpRequest) {
+	                     console.log(textStatus);
+	                     alert(error);
+	                 }
+                 });
+               
+			});	
+
+
 			//播放
 			$('.play-btn').click(function(){
 				if(!Player.isplay){
