@@ -92,6 +92,9 @@ $(document).ready(function(){
 			}
 			//alert(allList);
 			Player.$list.html(allList);  
+
+
+
 		},
 
 		
@@ -102,6 +105,13 @@ $(document).ready(function(){
 
 			//获取audio节点
 			Player.audio = Player.$audio.get(0);
+
+
+			//初始化第一首歌
+			$('.play-btn').css('backgroundPosition','-126px -41px');
+			autoBar();
+			showCurrentTime();
+			Player.isplay = true;
 
 			//传入歌曲id返回当前的歌曲url；
 			function setSongSrc(id){
@@ -148,6 +158,7 @@ $(document).ready(function(){
 	                     Player.data[0][0] = music_name;
 	                     Player.data[0][1] = song_id;
 	                     //加入到播放列表的第一个
+	                     Player.currentIndex = -1;
 	                     $list:$('.m-list-ol li').eq(0).html("1、"+music_name);
 	            		 $('.play-btn').click();
 
@@ -156,18 +167,25 @@ $(document).ready(function(){
 	                     alert(error);
 	                 }
                  });
-               
 			});	
 
 
 			//播放
 			$('.play-btn').click(function(){
+
+				//取消注释后播放网络歌曲列表；
+				
 				if(!Player.isplay){
-					//Player.audio.play();
+
+					Player.audio.play();
+					//如果要播放网络歌曲列表的第一首请取消下面注释
+					/*
 					if(Player.currentIndex == -1){
 						$('.m-list-ol li').eq(0).click();
 					}
+					*/
 					Player.isplay = true;
+					//暂停图片
 					$(this).css('backgroundPosition','-126px -41px');
 					showCurrentName(Player.currentIndex);
 				}
