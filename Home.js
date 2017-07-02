@@ -8,7 +8,6 @@ $(document).ready(function(){
 	//先显示第一张隐藏其他
 	$('.pic_tab').eq(0).show().siblings('.pic_tab').hide();
 	showTime();//开始轮播；
-	//小圆点hover
 	$('.doteq').hover(function(){
 		i = $(this).index();
 		//alert(i);
